@@ -39,13 +39,12 @@ Route::post('/registrasi-proses', [RegisterController::class, 'store'])->name('r
 
 #user
 Route::get('data', [DataController::class, 'index'])->name('page.data');
-Route::group(['middleware' => ['auth', 'User']],function(){
-	Route::get('diagnosa', [DiagnosaController::class, 'index'])->name('page.diagnosa');
-	Route::post('diagnosa', [DiagnosaController::class, 'proses'])->name('diagnosa.proses');
-});
+Route::get('diagnosa', [DiagnosaController::class, 'index'])->name('page.diagnosa');
+Route::post('diagnosa', [DiagnosaController::class, 'proses'])->name('diagnosa.proses');
+Route::get('diagnosa/cetak', [DiagnosaController::class, 'cetak'])->name('diagnosa.cetak');
 
 #admin
-Route::group(['middleware' => ['auth', 'AdminPakar']],function(){
+Route::group(['middleware' => ['auth', 'AdminPakar']], function () {
 	Route::resource('gejala', GejalaController::class);
 	Route::get('getGejala', [GejalaController::class, 'getGejala'])->name('gejala.list');
 	Route::delete('/gejala/{id}/delete', [GejalaController::class, 'destroy']);
@@ -58,14 +57,14 @@ Route::group(['middleware' => ['auth', 'AdminPakar']],function(){
 	Route::get('getAturan', [AturanController::class, 'getAturan'])->name('aturan.list');
 	Route::delete('/aturan/{id}/delete', [AturanController::class, 'destroy']);
 	Route::put('/aturan/{id}', [AturanController::class, 'store']);
-    Route::resource('materi', MateriController::class);
-    Route::get('getMateri', [MateriController::class, 'getMateri'])->name('materi.list');
-    Route::delete('/materi/{id}/delete', [MateriController::class, 'destroy']);
-    Route::put('/materi/{id}', [MateriController::class, 'store']);
+	// Route::resource('materi', MateriController::class);
+	// Route::get('getMateri', [MateriController::class, 'getMateri'])->name('materi.list');
+	// Route::delete('/materi/{id}/delete', [MateriController::class, 'destroy']);
+	// Route::put('/materi/{id}', [MateriController::class, 'store']);
 });
 
-Route::prefix('admin')->group(function () {
+// Route::prefix('admin')->group(function () {
 
-    Route::resource('user', UserController::class); //->middleware('level:super_admin');
-	Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);
-});
+// 	Route::resource('user', UserController::class); //->middleware('level:super_admin');
+// 	Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);
+// });

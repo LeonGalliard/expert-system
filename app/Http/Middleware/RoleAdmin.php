@@ -20,6 +20,6 @@ class RoleAdmin
         if (auth::check() && Auth::user()->level == 'admin') {
             return $next($request);
         }
-        return redirect()->route('gejala.index');
+        return redirect()->route('login');
     }
 }

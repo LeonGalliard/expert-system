@@ -6,7 +6,7 @@
         <span class="indicator__step active">Hasil Diagnosa</span>
     </div>
     {{-- End Indicators --}}
-    
+
     {{-- Table Result --}}
     <div class="step">
         {{-- 
@@ -56,12 +56,17 @@
                         <td><strong class="d-block">Jumlah Potensi Kerusakan</strong></td>
                         @if ($hasil)
                             @if ($kerusakanKuat)
-                                <td>Kami menemukan 1 kerusakan kuat dan {{ count($hasil) - 1 }} potensi kerusakan terkait yang mungkin terjadi pada motor anda.<br>Silahkan periksa hasil diagnosa dibawah.</td>
+                                <td>Kami menemukan 1 kerusakan kuat dan {{ count($hasil) - 1 }} potensi kerusakan
+                                    terkait yang mungkin terjadi pada motor anda.<br>Silahkan periksa hasil diagnosa
+                                    dibawah.</td>
                             @else
-                                <td>Kami tidak menemukan kerusakan kuat, tapi ada {{ count($hasil) }} potensi kerusakan yang mungkin terjadi pada motor anda.<br>Silahkan periksa hasil diagnosa dibawah.</td>
+                                <td>Kami tidak menemukan kerusakan kuat, tapi ada {{ count($hasil) }} potensi kerusakan
+                                    yang mungkin terjadi pada motor anda.<br>Silahkan periksa hasil diagnosa dibawah.
+                                </td>
                             @endif
                         @else
-                            <td>Kami tidak menemukan potensi kerusakan apapun pada motor anda.<br>Anda dapat mendiagnosa lagi untuk memastikan.</td>
+                            <td>Kami tidak menemukan potensi kerusakan apapun pada motor anda.<br>Anda dapat mendiagnosa
+                                lagi untuk memastikan.</td>
                         @endif
                     </tr>
                 </tbody>
@@ -77,9 +82,11 @@
                             </td>
                             <td>
                                 @if ($aturan['kerusakan'])
-                                    <strong class="d-block">{{ $aturan['kerusakan']->kode_kerusakan }} - {{ $aturan['kerusakan']->nama_kerusakan }}</strong>
+                                    <strong class="d-block">{{ $aturan['kerusakan']->kode_kerusakan }} -
+                                        {{ $aturan['kerusakan']->nama_kerusakan }}</strong>
                                 @else
-                                    <strong class="d-block">Kerusakan tidak ditemukan, mungkin motor anda baik-baik saja. <br>Anda dapat mendiagnosa lagi untuk memastikan.</strong>
+                                    <strong class="d-block">Kerusakan tidak ditemukan, mungkin motor anda baik-baik
+                                        saja. <br>Anda dapat mendiagnosa lagi untuk memastikan.</strong>
                                 @endif
 
                                 <small>
@@ -129,8 +136,9 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <a href="{{ route('page.diagnosa', ['step' => 'pertanyaan']) }}" class="btn btn-primary me-2">Diagnosa Lagi</a>
-            <a href="{{ route('diagnosa.cetak') }}" class="btn btn-success" target="_blank">Cetak</a>
+            <a href="{{ route('page.diagnosa', ['step' => 'pertanyaan']) }}" class="btn btn-primary me-2">Diagnosa
+                Lagi</a>
+            {{-- <a href="{{ route('diagnosa.cetak') }}" class="btn btn-success" target="_blank">Cetak</a> --}}
         </div>
     </div>
 </form>

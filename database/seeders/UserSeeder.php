@@ -14,26 +14,33 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Code Lama
+        // $user = new User();
+        // $user->username = "admin";
+        // $user->name = "admin";
+        // $user->level = "super_admin";
+        // $user->password = bcrypt('12345');
+        // $user->save();
+
+        // $user = new User();
+        // $user->username = "pakar";
+        // $user->name = "pakar";
+        // $user->level = "admin";
+        // $user->password = bcrypt('12345');
+        // $user->save();
+
+        // Super Admin
         $user = new User();
         $user->username = "admin";
-        $user->name = "admin";
-        $user->level = "admin";
-        $user->password = bcrypt('12345');
+        $user->level = "superAdmin"; // sesuaikan enum di migration
+        $user->password = bcrypt('12345'); // bcrypt password
         $user->save();
 
+        // Admin / Pakar
         $user = new User();
         $user->username = "pakar";
-        $user->name = "pakar";
-        $user->level = "pakar";
-        $user->password = bcrypt('12345');
+        $user->level = "admin"; // sesuai enum
+        $user->password = bcrypt('12345'); // bcrypt password
         $user->save();
-
-        $user = new User();
-        $user->username = "pengguna";
-        $user->name = "pengguna";
-        $user->level = "pengguna";
-        $user->password = bcrypt('12345');
-        $user->save();
-
     }
 }

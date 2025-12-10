@@ -52,24 +52,24 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('username', 30);
-            $table->string('name', 60);
-            $table->enum('level', ['super_admin', 'admin', 'user']);
-            $table->string('password', 65);
+            $table->id('idUser');
+            $table->string('username', 30)->unique();
+            $table->string('password', 32);
+            $table->enum('level', ['superAdmin', 'admin'])->default('admin');
+            $table->enum('status', ['aktif', 'non-aktif'])->default('aktif');
             $table->timestamps();
         });
 
-		// DB::table('users')->insert(
-		// 	array(
-		// 		'username' => 'admin',
-		// 		'name' => 'Administrator',
-		// 		'level' => 'super_admin',
-		// 		'password' => Hash::make('admin'),
-		// 		'created_at' => date('Y-m-d H:i:s'),
-		// 		'updated_at' => date('Y-m-d H:i:s'),
-		// 	)
-		// );
+        // DB::table('users')->insert(
+        // 	array(
+        // 		'username' => 'admin',
+        // 		'name' => 'Administrator',
+        // 		'level' => 'super_admin',
+        // 		'password' => Hash::make('admin'),
+        // 		'created_at' => date('Y-m-d H:i:s'),
+        // 		'updated_at' => date('Y-m-d H:i:s'),
+        // 	)
+        // );
     }
 
     /**

@@ -17,9 +17,9 @@ class RoleAdminPakar
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth::check() && (Auth::user()->level == 'pakar' || Auth::user()->level == 'admin')) {
+        if (auth::check() && (Auth::user()->level == 'pakar' || Auth::user()->level == 'admin' || Auth::user()->level == 'super_admin')) {
             return $next($request);
         }
-        return redirect()->route('gejala.index');
+        return redirect()->route('login');
     }
 }

@@ -20,6 +20,6 @@ class RolePakar
         if (auth::check() && Auth::user()->level == 'pakar') {
             return $next($request);
         }
-        return redirect()->route('gejala.index');
+        return redirect()->route('login');
     }
 }

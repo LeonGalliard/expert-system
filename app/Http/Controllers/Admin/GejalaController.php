@@ -43,11 +43,11 @@ class GejalaController extends Controller
         if ($terbaru->first()) {
             $terbaru = $terbaru->first();
             $terbaru = (int) str_replace(['g', 'G'], '', $terbaru->kode_gejala);
-            $terbaru = 'G'.++$terbaru;
+            $terbaru = 'G' . ++$terbaru;
         } else {
             $terbaru = 'G01';
         }
-        return view('admin.pages.gejala.index', ['terbaru'=>$terbaru,'gejala'=>Gejala::all()]);
+        return view('admin.pages.gejala.index', ['terbaru' => $terbaru, 'gejala' => Gejala::all()]);
         //untuk menghasilkan tampilan (view) dalam aplikasi web 
         //digunakan untuk mengarahkan pada file view yang terletak di direktori 'resources/views/admin/pages/gejala/index.blade.php'
         //['gejala'=>Gejala::all()] untuk mengirimkan data 'gejala' yang diperoleh dari memanggil metode all() pada model Gejala.
@@ -58,9 +58,9 @@ class GejalaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()//digunakan untuk menampilkan formulir pembuatan entitas baru kepada pengguna
+    public function create() //digunakan untuk menampilkan formulir pembuatan entitas baru kepada pengguna
     {
-        return view('admin.pages.gejala.create');//Dengan menggunakan pernyataan "return view", 
+        return view('admin.pages.gejala.create'); //Dengan menggunakan pernyataan "return view", 
         //tampilan 'admin.pages.gejala.create' akan dikembalikan dengan data yang diberikan. 
         //Tampilan ini dapat menggunakan data tersebut untuk ditampilkan kepada pengguna sesuai 
         //dengan kebutuhan.
@@ -77,18 +77,18 @@ class GejalaController extends Controller
     //untuk menyimpan data yang dikirim oleh pengguna melalui formulir ke dalam database atau 
     //melakukan tindakan penyimpanan data lainnya.
     {
-        $request->validate([//metode yang digunakan untuk memvalidasi data yang diterima dari objek Request
-            'kode_gejala' => 'required',//'required'" menentukan bahwa field 'kode_gejala' harus ada (tidak boleh kosong) dalam data yang dikirim.
+        $request->validate([ //metode yang digunakan untuk memvalidasi data yang diterima dari objek Request
+            'kode_gejala' => 'required', //'required'" menentukan bahwa field 'kode_gejala' harus ada (tidak boleh kosong) dalam data yang dikirim.
             'nama_gejala' => 'required',
         ]);
-        
-        Gejala::create([//digunakan untuk membuat dan menyimpan data baru ke dalam tabel atau koleksi yang terhubung dengan model "gejala"
-            'kode_gejala' => $request->kode_gejala,//menentukan bahwa field 'kode_gejala' pada 
+
+        Gejala::create([ //digunakan untuk membuat dan menyimpan data baru ke dalam tabel atau koleksi yang terhubung dengan model "gejala"
+            'kode_gejala' => $request->kode_gejala, //menentukan bahwa field 'kode_gejala' pada 
             //model "Gejala" akan diisi dengan nilai dari property 'kode_gejala' yang ada dalam 
             //objek Request
             'nama_gejala' => $request->nama_gejala,
-        //Dengan menggunakan pernyataan "Gejala::create", data baru akan dibuat berdasarkan 
-        //nilai-nilai yang diterima dari objek Request dan disimpan ke dalam tabel "gejala"
+            //Dengan menggunakan pernyataan "Gejala::create", data baru akan dibuat berdasarkan 
+            //nilai-nilai yang diterima dari objek Request dan disimpan ke dalam tabel "gejala"
         ]);
         return redirect()->route('gejala.index');
         //"redirect()"digunakan untuk melakukan pengalihan (redirect) ke halaman lain.
@@ -107,7 +107,7 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)//untuk menampilkan data spesifik berdasarkan ID yang diberikan
+    public function show($id) //untuk menampilkan data spesifik berdasarkan ID yang diberikan
     {
         //
     }
@@ -118,10 +118,10 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)//untuk memungkinkan pengguna mengedit data yang ada.
+    public function edit($id) //untuk memungkinkan pengguna mengedit data yang ada.
     {
-        $gejala=Gejala::find($id);//"$id" adalah parameter yang mewakili ID dari data yang ingin diedit. 
-        return view('admin.pages.gejala.edit', ['gejala'=>$gejala]);
+        $gejala = Gejala::find($id); //"$id" adalah parameter yang mewakili ID dari data yang ingin diedit. 
+        return view('admin.pages.gejala.edit', ['gejala' => $gejala]);
     }
 
     /**
@@ -135,8 +135,8 @@ class GejalaController extends Controller
     //untuk memproses permintaan update yang dikirimkan oleh pengguna untuk mengubah data yang ada.
     {
         $request->validate([
-        //"$request" mengacu pada objek Request yang digunakan untuk mengelola permintaan HTTP yang diterima oleh aplikasi.
-        //->validate([ adalah metode yang dipanggil pada objek Request untuk menerapkan validasi pada data yang dikirimkan dalam permintaan.
+            //"$request" mengacu pada objek Request yang digunakan untuk mengelola permintaan HTTP yang diterima oleh aplikasi.
+            //->validate([ adalah metode yang dipanggil pada objek Request untuk menerapkan validasi pada data yang dikirimkan dalam permintaan.
             "kode_gejala" => "required",
             "nama_gejala" => "required",
         ]);
@@ -144,15 +144,15 @@ class GejalaController extends Controller
         //"::find($id)" adalah metode statis dalam model "Gejala" yang digunakan untuk mencari 
         //dan mengambil data dengan ID yang sesuai dari basis data
         if ($request->kode_gejala) {
-        //->kode_gejala adalah cara untuk mengakses nilai dari bidang "kode_gejala" dalam 
-        //objek Request. Jika bidang "kode_gejala" tidak ada dalam permintaan atau memiliki 
-        //nilai kosong, maka kondisi tersebut akan bernilai false. Namun, jika bidang 
-        //"kode_gejala" ada dan memiliki nilai yang tidak kosong, maka kondisi tersebut 
-        //akan bernilai true.
+            //->kode_gejala adalah cara untuk mengakses nilai dari bidang "kode_gejala" dalam 
+            //objek Request. Jika bidang "kode_gejala" tidak ada dalam permintaan atau memiliki 
+            //nilai kosong, maka kondisi tersebut akan bernilai false. Namun, jika bidang 
+            //"kode_gejala" ada dan memiliki nilai yang tidak kosong, maka kondisi tersebut 
+            //akan bernilai true.
         }
-        $gejala->update([// untuk memperbarui data gejala yang sudah ada dalam basis data 
+        $gejala->update([ // untuk memperbarui data gejala yang sudah ada dalam basis data 
             //berdasarkan nilai-nilai yang diterima melalui objek Request.
-            'kode_gejala' => $request->kode_gejala,//'kode_gejala' diupdate dengan nilai dari 
+            'kode_gejala' => $request->kode_gejala, //'kode_gejala' diupdate dengan nilai dari 
             //"$request->kode_gejala" (nilai yang diterima melalui objek Request).
             'nama_gejala' => $request->nama_gejala,
         ]);
@@ -166,32 +166,32 @@ class GejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)//untuk menghapus data gejala yang ada berdasarkan ID yang diberikan
-    {//"$id" adalah parameter yang mewakili ID dari data gejala yang ingin dihapus
-        $gejala = Gejala::find($id);//digunakan untuk mencari data gejala berdasarkan ID yang diberikan
-        $gejala->delete();//pernyataan yang digunakan untuk menghapus data gejala yang telah 
+    public function destroy($id) //untuk menghapus data gejala yang ada berdasarkan ID yang diberikan
+    { //"$id" adalah parameter yang mewakili ID dari data gejala yang ingin dihapus
+        $gejala = Gejala::find($id); //digunakan untuk mencari data gejala berdasarkan ID yang diberikan
+        $gejala->delete(); //pernyataan yang digunakan untuk menghapus data gejala yang telah 
         //ditemukan sebelumnya, menggunakan metode "delete()"
 
-        return redirect()->route('gejala.index');//digunakan untuk mengarahkan pengguna kembali 
+        return redirect()->route('gejala.index'); //digunakan untuk mengarahkan pengguna kembali 
         //ke halaman yang ditentukan setelah proses penghapusan berhasil
     }
-    public function uplod($id)//adalah deklarasi sebuah metode dengan nama "upload" yang menerima parameter $id. 
+    public function uplod($id) //adalah deklarasi sebuah metode dengan nama "upload" yang menerima parameter $id. 
     //Metode ini kemungkinan bertujuan untuk mengunggah file terkait gejala dengan menggunakan ID gejala yang diberikan sebagai parameter.
     {
-        $gejala = Gejala::find($id);//"$gejala = Gejala::find($id);" merupakan pemanggilan metode statis "find()" pada model Gejala
-        $gejala->uplod();//pemanggilan metode "upload()" pada objek $gejala
+        $gejala = Gejala::find($id); //"$gejala = Gejala::find($id);" merupakan pemanggilan metode statis "find()" pada model Gejala
+        $gejala->uplod(); //pemanggilan metode "upload()" pada objek $gejala
 
-        return redirect()->route('gejala.index');//pernyataan yang mengarahkan pengguna ke rute bernama 'gejala.index' setelah proses unggah file berhasil dilakukan. 
+        return redirect()->route('gejala.index'); //pernyataan yang mengarahkan pengguna ke rute bernama 'gejala.index' setelah proses unggah file berhasil dilakukan. 
     }
 
     public function getGejala(Request $request)
-    {//untuk mengambil data gejala berdasarkan permintaan yang diterima.
+    { //untuk mengambil data gejala berdasarkan permintaan yang diterima.
         if (!$request->ajax()) {
             return '';
-        //Jika permintaan bukan permintaan AJAX, maka blok kode di dalam blok "if" akan dieksekusi
-        //return ''; digunakan untuk mengembalikan sebuah string kosong
-        //AJAX (Asynchronous JavaScript and XML) adalah sebuah teknik dalam pengembangan web yang 
-        //memungkinkan pengiriman dan penerimaan data dari server ke halaman web tanpa harus me-refresh seluruh halaman
+            //Jika permintaan bukan permintaan AJAX, maka blok kode di dalam blok "if" akan dieksekusi
+            //return ''; digunakan untuk mengembalikan sebuah string kosong
+            //AJAX (Asynchronous JavaScript and XML) adalah sebuah teknik dalam pengembangan web yang 
+            //memungkinkan pengiriman dan penerimaan data dari server ke halaman web tanpa harus me-refresh seluruh halaman
         }
 
         $data = Gejala::OrderBy('kode_gejala', 'ASC')->get();
@@ -202,9 +202,14 @@ class GejalaController extends Controller
         //$data adalah variabel yang digunakan untuk menyimpan hasil pengambilan data gejala dari basis data. berisi koleksi objek model yang mewakili data gejala yang telah diurutkan.
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {//digunakan untuk menambahkan kolom 'action' pada tabel yang dikonfigurasi menggunakan DataTables. 
-            //Fungsi anonim atau closure dimulai di sini untuk menentukan logika penampilan nilai kolom 'action' berdasarkan data yang ada dalam setiap baris.
-                $editBtn = '<a href="' . route('gejala.edit', $row) . '" class="btn btn-md btn-info mr-2 mb-2 mb-lg-0"><i class="far fa-edit"></i> Edit</a>';
+            ->addColumn('action', function ($row) { //digunakan untuk menambahkan kolom 'action' pada tabel yang dikonfigurasi menggunakan DataTables. 
+                //Fungsi anonim atau closure dimulai di sini untuk menentukan logika penampilan nilai kolom 'action' berdasarkan data yang ada dalam setiap baris.
+                $editBtn = '<button type="button" class="btn btn-md btn-info mr-2 mb-2 mb-lg-0 editGejala" 
+                                data-id="' . $row->id . '" 
+                                data-kode="' . $row->kode_gejala . '" 
+                                data-nama="' . $row->nama_gejala . '">
+                                <i class="far fa-edit"></i> Edit
+                            </button>';
                 //"$editBtn" adalah variabel yang digunakan untuk menyimpan string HTML yang merepresentasikan tombol Edit. 
                 //Pada contoh yang diberikan, string tersebut memiliki atribut href yang menuju ke rute 'gejala.edit' 
                 //dengan parameter $row sebagai id. Tombol Edit ditampilkan dalam elemen <a> dengan kelas CSS dan ikon Font Awesome yang sesuai.
@@ -213,14 +218,14 @@ class GejalaController extends Controller
                 //Pada contoh yang diberikan, string tersebut memiliki atribut href yang menuju ke rute 'gejala.destroy' 
                 //dengan parameter $row sebagai id, dan menggunakan fungsi JavaScript "notificationBeforeDelete(event, this)" untuk memberikan notifikasi sebelum menghapus data. 
                 //Tombol Hapus ditampilkan dalam elemen <a> dengan kelas CSS dan ikon Font Awesome yang sesuai.
-                return $editBtn . $deleteBtn;//menggabungkan string dari variabel $editBtn dan $deleteBtn, sehingga menghasilkan string HTML yang berisi kedua tombol Edit dan Hapus pada kolom 'action' 
+                return $editBtn . $deleteBtn; //menggabungkan string dari variabel $editBtn dan $deleteBtn, sehingga menghasilkan string HTML yang berisi kedua tombol Edit dan Hapus pada kolom 'action' 
             })
-            ->rawColumns(['kode_gejala', 'action'])//untuk memberikan informasi kepada DataTables 
+            ->rawColumns(['kode_gejala', 'action']) //untuk memberikan informasi kepada DataTables 
             //bahwa kolom 'kode_gejala' dan 'action' tidak perlu melalui proses penyaringan HTML 
             //yang biasanya dilakukan oleh DataTables.
-            ->make(true);//untuk menghasilkan respons JSON dari objek DataTables yang telah dikonfigurasi
-            //Dengan menggunakan pernyataan ini, pengaturan dan konfigurasi DataTables telah selesai, 
-            //dan objek DataTables akan menghasilkan respons JSON yang berisi data yang telah 
-            //diproses dan siap ditampilkan dalam tampilan web.
+            ->make(true); //untuk menghasilkan respons JSON dari objek DataTables yang telah dikonfigurasi
+        //Dengan menggunakan pernyataan ini, pengaturan dan konfigurasi DataTables telah selesai, 
+        //dan objek DataTables akan menghasilkan respons JSON yang berisi data yang telah 
+        //diproses dan siap ditampilkan dalam tampilan web.
     }
 }
